@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ZErf 0.1</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1> ZErf Stop</h1>
+    {% if record %}
+    <table>
+      <tr>
+        <td>Start:</td>
+        <td>{{ record.start_time }}</td>
+      </tr>
+      <tr>
+        <td>Stop:</td>
+        <td>{{ record.stop_time }}</td>
+    </table>
+    {% endif %}
+  </body>
+</html>

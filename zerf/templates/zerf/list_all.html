@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ZErf 0.1</title>
+    <link href="templates/zerf/style.css" rel="stylesheet">
+  </head>
+  <body>
+    {% if records %}
+    <table width="50%">
+      <tr>
+        <th>Start</th>
+        <th>Stop</th>
+      </tr>
+    {% for record in records %}
+      <tr>
+        <td>{{ record.start_time }}</td>
+        <td>{{ record.stop_time }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>
