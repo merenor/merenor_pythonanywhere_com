@@ -16,14 +16,27 @@ def start(request):
 def stop(request):
     current_record = Record.objects.filter(
         start_time__lte=timezone.now()).order_by('-start_time')[0]
-    current_record.stop_time = timezone.now()
-    current_record.interval = current_record.stop_time - current_record.start_time
-    current_record.save()
 
-    return render(request, 'zerf/stop.html', {'record': current_record})
+    if current_record.stop_time == None:
+        current_record.stop_time = timezone.now()
+        current_record.interval = current_record.stop_time - current_record.start_time
+        current_record.save()
+
+        return render(request, 'zerf/stop.html', {'record': current_record})
+    else:
+        return render(request, 'zerf/error.html')
 
 
 def list_all(request):
+    summe = datetime.timedelta()
+
     records = Record.objects.all().order_by('-start_time')
 
-    return render(request, 'zerf/list_all.html', {'records': records})
+    for record in records:
+        summe += record.interval
+
+    return render(request, 'zerf/list_all.html',
+        {
+            'records': records,
+            'summe': summe
+        })
